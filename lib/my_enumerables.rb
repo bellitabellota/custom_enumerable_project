@@ -9,6 +9,16 @@ module Enumerable
 
     return self
   end
+
+  def my_all?
+    self.my_each do |elem|
+    return false if yield(elem) == false
+    end
+
+    true
+  end
+
+
 end
 
 # You will first have to define my_each
@@ -17,7 +27,9 @@ end
 # to this method
 class Array
   # Define my_each here
-  array = [1, 2, 3]
+  array = [1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-  array.my_each { |elem| puts elem}
+  array.my_each { |elem| elem}  
+
+  array.my_all? { |value| value < 5 }
 end
