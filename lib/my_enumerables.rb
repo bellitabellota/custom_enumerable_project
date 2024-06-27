@@ -10,6 +10,16 @@ module Enumerable
     return self
   end
 
+  def my_each_with_index
+    i = 0
+    until i == self.length do
+      yield(self[i], i)
+      i += 1
+    end
+
+    self
+  end
+
   def my_all?
     self.my_each do |elem|
     return false if yield(elem) == false
@@ -57,4 +67,5 @@ class Array
 
   array.my_count {|elem| elem > 5}
 
+  array.my_each_with_index { |elem, index| puts "The element is #{elem} and the index #{index}" }
 end
