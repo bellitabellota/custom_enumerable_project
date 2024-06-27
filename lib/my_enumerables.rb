@@ -49,6 +49,16 @@ module Enumerable
 
     self.reduce(0) { |sum| sum += 1 }  
   end
+  def my_inject(initial_value = nil)
+    accumulator = initial_value
+
+    self.my_each_with_index do |elem, index|
+      next accumulator = elem if index == 0 && accumulator == nil
+
+      accumulator = yield(accumulator, elem)
+    end
+    accumulator
+  end
 end
 
 # You will first have to define my_each
@@ -67,5 +77,7 @@ class Array
 
   array.my_count {|elem| elem > 5}
 
-  array.my_each_with_index { |elem, index| puts "The element is #{elem} and the index #{index}" }
+  # array.my_each_with_index { |elem, index| puts "The element is #{elem} and the index #{index}" }
+
+  array.my_inject(4) { |accumulator, elem| accumulator + elem }
 end
