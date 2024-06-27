@@ -26,6 +26,19 @@ module Enumerable
     false
   end
 
+  def my_count
+    if block_given?
+      sum = 0
+
+      self.my_each do |elem|
+        sum +=1 if yield(elem)
+      end
+      
+      return sum
+    end
+
+    self.reduce(0) { |sum| sum += 1 }  
+  end
 end
 
 # You will first have to define my_each
@@ -41,5 +54,7 @@ class Array
   array.my_all? { |value| value < 5 }
 
   array.my_any? { |elem| elem == 34 }
+
+  array.my_count {|elem| elem > 5}
 
 end
