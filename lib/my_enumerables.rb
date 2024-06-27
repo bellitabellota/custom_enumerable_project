@@ -18,6 +18,13 @@ module Enumerable
     true
   end
 
+  def my_any?
+    self.my_each do |elem|
+      return true if yield(elem) == true
+    end
+
+    false
+  end
 
 end
 
@@ -32,4 +39,7 @@ class Array
   array.my_each { |elem| elem}  
 
   array.my_all? { |value| value < 5 }
+
+  array.my_any? { |elem| elem == 34 }
+
 end
