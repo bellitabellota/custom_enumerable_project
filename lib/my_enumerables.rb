@@ -59,6 +59,15 @@ module Enumerable
     end
     accumulator
   end
+
+  def my_map
+    new_array = []
+    self.my_each do |elem|
+      new_array.push(yield(elem))
+      
+    end
+    new_array
+  end
 end
 
 # You will first have to define my_each
@@ -80,4 +89,6 @@ class Array
   # array.my_each_with_index { |elem, index| puts "The element is #{elem} and the index #{index}" }
 
   array.my_inject(4) { |accumulator, elem| accumulator + elem }
+
+  p array.my_map { |elem| elem * 2 }
 end
