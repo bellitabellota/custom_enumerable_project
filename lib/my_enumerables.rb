@@ -76,6 +76,14 @@ module Enumerable
 
     return true
   end
+
+  def my_select
+    new_array = []
+    self.my_each do |elem|
+      new_array.push(elem) if yield(elem)
+    end
+    new_array
+  end
 end
 
 # You will first have to define my_each
@@ -100,5 +108,7 @@ class Array
 
   array.my_map { |elem| elem * 2 }
 
-  p array.my_none? { |elem| elem < 0 }
+   array.my_none? { |elem| elem < 0 }
+
+  p array.my_select { |elem| elem > 1 }
 end
