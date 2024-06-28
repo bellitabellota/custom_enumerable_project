@@ -68,6 +68,14 @@ module Enumerable
     end
     new_array
   end
+
+  def my_none?
+    self.my_each do |elem|
+      return false if yield(elem)
+    end
+
+    return true
+  end
 end
 
 # You will first have to define my_each
@@ -90,5 +98,7 @@ class Array
 
   array.my_inject(4) { |accumulator, elem| accumulator + elem }
 
-  p array.my_map { |elem| elem * 2 }
+  array.my_map { |elem| elem * 2 }
+
+  p array.my_none? { |elem| elem < 0 }
 end
